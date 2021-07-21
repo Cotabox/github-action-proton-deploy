@@ -1,0 +1,33 @@
+name: 'AWS Proton deployment release'
+description: 'This action updates a given AWS Proton service instance with a new Docker image'
+author: 'jefersonhuan'
+inputs:
+  AWS_DEFAULT_REGION:
+    description: "AWS Region"
+    required: false
+    default: us-east-1
+  AWS_ACCESS_KEY_ID:
+    description: "AWS_ACCESS_KEY_ID credential"
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    description: "AWS_SECRET_ACCESS_KEY credential"
+    required: true
+  SERVICE_NAME:
+    description: "AWS Proton service's name"
+    required: true
+  SERVICE_INSTANCE_NAME:
+    description: "AWS Proton service instance's name"
+    required: true
+  IMAGE:
+    description: "Docker image"
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    AWS_DEFAULT_REGION: ${{ inputs.AWS_DEFAULT_REGION }}
+    AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+    SERVICE_NAME: ${{ inputs.SERVICE_NAME }}
+    SERVICE_INSTANCE_NAME: ${{ inputs.SERVICE_INSTANCE_NAME }}
+    IMAGE: ${{ inputs.IMAGE }}
